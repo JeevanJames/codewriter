@@ -4,6 +4,11 @@ export declare class CodeWriter {
     private currentIndent;
     private options;
     private indentSize;
+    /**
+     * Creates an instance of the CodeWriter class.
+     * @param {CodeWriterOptions} options - Options used to configure the CodeWriter instance.
+     * If not specified, default options are used.
+     */
     constructor(options?: CodeWriterOptions);
     /**
      * Indents the current indent level.
@@ -15,6 +20,10 @@ export declare class CodeWriter {
      * @param {string} code - If specified, code is added after unindenting.
      */
     unindent(code?: string): this;
+    /**
+     * Writes one or more lines of indented code.
+     * @param {string[]} code - One or more lines of code to write.
+     */
     line(...code: string[]): this;
     lineIf(condition: boolean, ...code: string[]): this;
     /**
@@ -28,7 +37,7 @@ export declare class CodeWriter {
      * Indicates the completion of one or more inline() calls and outputs the current line.
      */
     done(): this;
-    blank(condition: boolean): this;
+    blank(condition?: boolean): this;
     /**
      * Iterates over an array and executes the given function that builds code based on each item.
      * @param {Array} arr The array to iterate over.

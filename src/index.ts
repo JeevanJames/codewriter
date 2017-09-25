@@ -11,7 +11,8 @@ export class CodeWriter {
 
     /**
      * Creates an instance of the CodeWriter class.
-     * @param {CodeWriterOptions} options - Options used to configure the CodeWriter instance. If not specified, default options are used.
+     * @param {CodeWriterOptions} options - Options used to configure the CodeWriter instance.
+     * If not specified, default options are used.
      */
     constructor(options?: CodeWriterOptions) {
         this.options = options || {};
