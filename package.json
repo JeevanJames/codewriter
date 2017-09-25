@@ -1,0 +1,35 @@
+{
+    "name": "codewriter",
+    "version": "1.0.0-beta.4",
+    "description": "Node class to build a code block",
+    "main": "index.js",
+    "scripts": {
+        "start": "tsc --watch",
+        "build": "tsc",
+        "lint": "tslint --project tsconfig.json --format verbose",
+        "bump": "npm version prerelease --no-git-tag-version",
+        "prepublishOnly": "npm run build && npm run lint",
+        "postpublish": "npm run bump"
+    },
+    "typings": "./lib/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JeevanJames/codewriter.git"
+    },
+    "keywords": [
+        "code",
+        "writer",
+        "builder"
+    ],
+    "author": "Jeevan James",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/JeevanJames/codewriter/issues"
+    },
+    "homepage": "https://github.com/JeevanJames/codewriter#readme",
+    "devDependencies": {
+        "@types/node": "^8.0.30",
+        "tslint": "^5.7.0",
+        "typescript": "^2.5.2"
+    }
+}
