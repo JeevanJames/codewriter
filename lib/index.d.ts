@@ -42,6 +42,7 @@ export declare class CodeWriter {
     func(builderFn: (cw: this, ...args: Object[]) => void, ...args: Object[]): this;
     funcIf(condition: boolean, builderFn: (cw: this, ...args: Object[]) => void, ...args: Object[]): this;
     comment(...comments: string[]): this;
+    multiLineComment(...comments: string[]): this;
     /**
      * Returns the currently built code as a string
      */
@@ -51,5 +52,6 @@ export interface CodeWriterOptions {
     initialCode?: InitialCode;
     indentSize?: number;
     singleLineComment?: (comment: string) => string;
+    multiLineComment?: (comments: string[]) => string[];
 }
 export declare type InitialCode = string | string[] | CodeWriter | undefined;

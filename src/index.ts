@@ -9,6 +9,10 @@ export class CodeWriter {
     private options: CodeWriterOptions;
     private indentSize: number;
 
+    /**
+     * Creates an instance of the CodeWriter class.
+     * @param {CodeWriterOptions} options - Options used to configure the CodeWriter instance. If not specified, default options are used.
+     */
     constructor(options?: CodeWriterOptions) {
         this.options = options || {};
         const initialCode: InitialCode = this.options.initialCode;
@@ -54,6 +58,10 @@ export class CodeWriter {
         return this;
     }
 
+    /**
+     * Writes one or more lines of indented code.
+     * @param {string[]} code - One or more lines of code to write.
+     */
     public line(...code: string[]): this {
         for (let i = 0; i < (code || []).length; i++) {
             this.code.push(' '.repeat(this.currentIndent) + code[i]);
@@ -92,7 +100,7 @@ export class CodeWriter {
         return this;
     }
 
-    public blank(condition: boolean): this {
+    public blank(condition?: boolean): this {
         if (condition === undefined || (condition !== undefined && condition)) {
             this.code.push('');
         }
@@ -134,11 +142,21 @@ export class CodeWriter {
     }
 
     public comment(...comments: string[]): this {
-        if (!!this.options.singleLineComment) {
-            const formattedComments = (comments || [])
-                .map(c => this.options.singleLineComment ? this.options.singleLineComment(c) : '');
-            this.line(...formattedComments);
+        if (!this.options.singleLineComment) {
+            throw new Error(`Formatter for a single line comment needs to be defined in the CodeWriter's constructor.`);
         }
+        const formattedComments = (comments || [])
+            .map(c => this.options.singleLineComment ? this.options.singleLineComment(c) : '');
+        this.line(...formattedComments);
+        return this;
+    }
+
+    public multiLineComment(...comments: string[]): this {
+        if (!this.options.multiLineComment) {
+            throw new Error(`Formatter for a multi line comment needs to be defined in the CodeWriter's constructor.`);
+        }
+        const formattedComments = this.options.multiLineComment(comments || []);
+        this.line(...formattedComments);
         return this;
     }
 
@@ -154,6 +172,7 @@ export interface CodeWriterOptions {
     initialCode?: InitialCode;
     indentSize?: number;
     singleLineComment?: (comment: string) => string;
+    multiLineComment?: (comments: string[]) => string[];
 }
 
 export type InitialCode = string | string[] | CodeWriter | undefined;
