@@ -34,12 +34,13 @@ const code: string = writer.toCode();
 ## Options
 CodeWriter allows some options to be specified in the constructor to customize its behavior.
 All options are optional and have defaults.
-|Option|Type|Default|Description|
-|------|------|------|------|
-|indentSize|number|4|Size of the code indentation, in number of spaces|
-|initialCode|Multiple types|-|Code to initialize the CodeWriter with. Could be a string, string[] or another CodeWriter instance.|
-|singleLineComment|function|-|Function that accepts a string and returns a string formatted like a single-line comment in the intended language. If not specified, CodeWriter will throw an exception if you try to call the `comment` method.|
-|multiLineComment|function|-|Function that accepts a string array and returns a string array where each item is formatted like a multi-line comment in the intended language. If not specified, CodeWriter will throw an exception if you try to call the `multiLineComment` method.|
+
+| Option | Type | Default | Description |
+|---------|---------|---------|---------|
+|**indentSize**|number|4|Size of the code indentation, in number of spaces|
+|**initialCode**|Multiple types|-|Code to initialize the CodeWriter with. Could be a string, string[] or another CodeWriter instance.|
+|**singleLineComment**|function|-|Function that accepts a string and returns a string formatted like a single-line comment in the intended language. If not specified, CodeWriter will throw an exception if you try to call the `comment` method.|
+|**multiLineComment**|function|-|Function that accepts a string array and returns a string array where each item is formatted like a multi-line comment in the intended language. If not specified, CodeWriter will throw an exception if you try to call the `multiLineComment` method.|
 
 Examples of the `singleLineComment` and `multiLineComment` are shown below (for generating JavaScript-style comments):
 ```js
