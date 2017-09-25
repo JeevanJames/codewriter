@@ -80,5 +80,22 @@ writer
         .unindent(`}`)
     .unindent(`}`);
 const code: string = writer.toCode();
+```
 
+## Building the code
+```sh
+# Clone repo from GitHub
+git clone https://github.com/JeevanJames/codewriter.git .
+
+# Install dependencies
+npm install
+
+# Build code
+npm run build
+
+# Lint code
+npm run lint
+
+# Continuously watch for code changes and build
+npm run watch
 ```
