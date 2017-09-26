@@ -83,6 +83,13 @@ writer
 const code: string = writer.toCode();
 ```
 
+## API reference
+[JSDoc Documentation](API.md)
+
+You can view the source code comments directly from [GitHub](https://github.com/JeevanJames/codewriter/blob/master/src/index.ts).
+
+If you are using Typescript, you can install the package locally to get code completion support from supported IDE's and editors.
+
 ## Building the code
 ```sh
 # Clone repo from GitHub

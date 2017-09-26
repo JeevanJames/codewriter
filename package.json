@@ -1,7 +1,7 @@
 {
     "name": "codewriter",
-    "version": "1.0.0-beta.8",
-    "description": "Node class to build a code block",
+    "version": "1.0.0-beta.9",
+    "description": "Fluent Node library for generating code blocks.",
     "main": "index.js",
     "scripts": {
         "watch": "tsc --watch",
