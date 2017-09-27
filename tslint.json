@@ -11,7 +11,9 @@
         ],
         "ban-types": false,
         "interface-name": false,
+        "max-classes-per-file": false,
         "no-any": true,
+        "object-literal-sort-keys": false,
         "quotemark": [
             true,
             "single"

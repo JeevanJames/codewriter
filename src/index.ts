@@ -313,16 +313,15 @@ export class OptionsLibrary {
                         .inline(`${code}`, !!code)
                         .inline(` `, !code || braceLayout === 'endOfLine')
                         .inline('{')
-                        .done()
+                        .done();
                 }
                 writer.indent();
             },
 
             endBlock: (writer, code) => {
                 writer.unindent(code || '}');
-            }
+            },
         };
         return options;
     }
 }
-

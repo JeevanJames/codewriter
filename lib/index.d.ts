@@ -151,5 +151,5 @@ export declare type EndBlockFn = (cw: CodeWriter, code?: string) => void;
 export declare class OptionsLibrary {
     static cLanguageFamily(prefs?: {
         braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
-    }, initializer?: (options: CodeWriterOptions) => void): CodeWriterOptions;
+    }): CodeWriterOptions;
 }
