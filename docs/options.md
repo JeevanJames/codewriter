@@ -1,5 +1,5 @@
 # CodeWriter options
-All options are optional and have defaults.
+All options are optional and have defaults. Click [here](options-example.md) to see a sample options set-up for generating JavaScript code.
 
 | Option | Type | Default | Description |
 |---------|---------|---------|---------|
