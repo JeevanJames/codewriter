@@ -324,4 +324,28 @@ export class OptionsLibrary {
         };
         return options;
     }
+
+    public static get csharp(): CodeWriterOptions {
+        return OptionsLibrary.cLanguageFamily({
+            braceLayout: 'nextLine'
+        });
+    }
+
+    public static get java(): CodeWriterOptions {
+        return OptionsLibrary.cLanguageFamily({
+            braceLayout: 'endOfLine'
+        });
+    }
+
+    public static get javascript(): CodeWriterOptions {
+        return OptionsLibrary.cLanguageFamily({
+            braceLayout: 'endOfLine'
+        });
+    }
+
+    public static get typescript(): CodeWriterOptions {
+        return OptionsLibrary.cLanguageFamily({
+            braceLayout: 'endOfLine'
+        });
+    }
 }

@@ -1,9 +1,6 @@
 import { CodeWriter, CodeWriterOptions, OptionsLibrary } from '../src';
 
-const options: CodeWriterOptions = OptionsLibrary.cLanguageFamily({
-    braceLayout: 'nextLine'
-});
-options.indentSize = 8;
+const options: CodeWriterOptions = OptionsLibrary.csharp;
 const writer = new CodeWriter(options);
 
 writer
