@@ -51,7 +51,7 @@ export declare class CodeWriter {
      * @param {string} code The code to add to the current line
      * @param {boolean} condition The condition upon which the code will be added
      */
-    inline(code: string, condition: boolean): this;
+    inline(code: string, condition?: boolean): this;
     /**
      * Indicates the completion of one or more inline() calls and writes the current line.
      */
@@ -148,3 +148,8 @@ export declare type SingleLineCommentFn = (cw: CodeWriter, comment: string) => v
 export declare type MultiLineCommentFn = (cw: CodeWriter, comments: string[]) => void;
 export declare type StartBlockFn = (cw: CodeWriter, code?: string) => void;
 export declare type EndBlockFn = (cw: CodeWriter, code?: string) => void;
+export declare class OptionsLibrary {
+    static cLanguageFamily(prefs?: {
+        braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
+    }, initializer?: (options: CodeWriterOptions) => void): CodeWriterOptions;
+}

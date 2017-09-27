@@ -116,7 +116,7 @@ export class CodeWriter {
      * @param {string} code The code to add to the current line
      * @param {boolean} condition The condition upon which the code will be added
      */
-    public inline(code: string, condition: boolean): this {
+    public inline(code: string, condition?: boolean): this {
         if (condition == undefined || (condition != undefined && condition)) {
             this.currentLine = (this.currentLine || '') + code;
         }
@@ -284,3 +284,45 @@ export type SingleLineCommentFn = (cw: CodeWriter, comment: string) => void;
 export type MultiLineCommentFn = (cw: CodeWriter, comments: string[]) => void;
 export type StartBlockFn = (cw: CodeWriter, code?: string) => void;
 export type EndBlockFn = (cw: CodeWriter, code?: string) => void;
+
+export class OptionsLibrary {
+    public static cLanguageFamily(prefs?: {
+        braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
+    }): CodeWriterOptions {
+        prefs = prefs || {};
+        const options: CodeWriterOptions = {
+            singleLineComment: (writer, comment) => {
+                writer.line(`// ${comment}`);
+            },
+
+            multiLineComment: (writer, comments) => {
+                writer.line('/*')
+                    .repeat(comments || [], (cw, comment) => {
+                        cw.line(`   ${comment}`);
+                    })
+                    .line(' */');
+            },
+
+            startBlock: (writer, code) => {
+                const braceLayout = (prefs || {}).braceLayout || 'endOfLine';
+                if (braceLayout === 'nextLine') {
+                    writer.lineIf(!!code, code || '')
+                        .line('{');
+                } else {
+                    writer
+                        .inline(`${code}`, !!code)
+                        .inline(` `, !code || braceLayout === 'endOfLine')
+                        .inline('{')
+                        .done()
+                }
+                writer.indent();
+            },
+
+            endBlock: (writer, code) => {
+                writer.unindent(code || '}');
+            }
+        };
+        return options;
+    }
+}
+

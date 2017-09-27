@@ -1,27 +1,9 @@
-import { CodeWriter } from '../src';
-import { CodeWriterOptions } from '../src/code-writer-options';
+import { CodeWriter, CodeWriterOptions, OptionsLibrary } from '../src';
 
-const options: CodeWriterOptions = {
-    indentSize: 4,
-    singleLineComment: (cw, comment) => {
-        cw.line(`// ${comment || ''}`);
-    },
-    multiLineComment: (cw, comments) => {
-        cw.line(`/*`)
-            .repeat(comments || [], (writer, comment) => writer.line(` * ${comment || ''}`))
-            .line(` */`);
-    },
-    startBlock: (cw, code) => {
-        if (code) {
-            cw.line(code);
-        }
-        cw.line(`{`);
-        cw.indent();
-    },
-    endBlock: (cw, code) => {
-        cw.unindent(`}`);
-    }
-};
+const options: CodeWriterOptions = OptionsLibrary.cLanguageFamily({
+    braceLayout: 'nextLine'
+});
+options.indentSize = 8;
 const writer = new CodeWriter(options);
 
 writer
