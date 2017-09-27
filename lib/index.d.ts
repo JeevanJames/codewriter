@@ -152,4 +152,8 @@ export declare class OptionsLibrary {
     static cLanguageFamily(prefs?: {
         braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
     }): CodeWriterOptions;
+    static readonly csharp: CodeWriterOptions;
+    static readonly java: CodeWriterOptions;
+    static readonly javascript: CodeWriterOptions;
+    static readonly typescript: CodeWriterOptions;
 }

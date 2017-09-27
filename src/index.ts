@@ -327,25 +327,25 @@ export class OptionsLibrary {
 
     public static get csharp(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
-            braceLayout: 'nextLine'
+            braceLayout: 'nextLine',
         });
     }
 
     public static get java(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
-            braceLayout: 'endOfLine'
+            braceLayout: 'endOfLine',
         });
     }
 
     public static get javascript(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
-            braceLayout: 'endOfLine'
+            braceLayout: 'endOfLine',
         });
     }
 
     public static get typescript(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
-            braceLayout: 'endOfLine'
+            braceLayout: 'endOfLine',
         });
     }
 }
