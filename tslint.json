@@ -11,6 +11,7 @@
         ],
         "ban-types": false,
         "interface-name": false,
+        "no-any": true,
         "quotemark": [
             true,
             "single"

@@ -1,8 +1,9 @@
 {
     "name": "codewriter",
-    "version": "1.1.0-beta.3",
+    "version": "1.1.0-beta.5",
     "description": "Fluent Node library for generating code blocks.",
-    "main": "index.js",
+    "main": "./lib/index.js",
+    "typings": "./lib/index.d.ts",
     "scripts": {
         "watch": "tsc --watch",
         "build": "tsc && jsdoc2md ./lib/index.js > API.md",
@@ -12,7 +13,6 @@
         "postpublish": "npm run bump",
         "test-harness": "tsc --project ./test-harness/tsconfig.json && node ./test-harness/index"
     },
-    "typings": "./lib/index.d.ts",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/JeevanJames/codewriter.git"
