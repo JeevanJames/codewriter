@@ -1,4 +1,5 @@
 src
+test-harness
 
 .editorconfig
 tsconfig.json

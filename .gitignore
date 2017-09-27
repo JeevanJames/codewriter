@@ -1,3 +1,6 @@
+# Project-specific
+test-harness/index.js
+
 # Logs
 logs
 *.log
