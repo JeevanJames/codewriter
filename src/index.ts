@@ -1,5 +1,7 @@
 import * as os from 'os';
 
+import { CodeWriterOptions, InitialCode } from './code-writer-options';
+
 export class CodeWriter {
     private code: string[];
 
@@ -56,6 +58,34 @@ export class CodeWriter {
         if (code) {
             this.line(code);
         }
+        return this;
+    }
+
+    /**
+     * Writes an opening block. The logic to write the block is language-specific and should be
+     * configured in the options.startBlock property.
+     * @param {string} code Optional code that can be part of the block. This may be used for
+     * certain languages and ignored for others.
+     */
+    public startBlock(code?: string): this {
+        if (!this.options.startBlock) {
+            throw new Error(`Formatter for a start block needs to be defined in the CodeWriter's constructor.`);
+        }
+        this.options.startBlock(this, code);
+        return this;
+    }
+
+    /**
+     * Writes a closing block. The logic to write the block is language-specific and should be
+     * configured in the options.endBlock property.
+     * @param {string} code Optional code that can be part of the block. This may be used for
+     * certain languages and ignored for others.
+     */
+    public endBlock(code?: string): this {
+        if (!this.options.endBlock) {
+            throw new Error(`Formatter for an end block needs to be defined in the CodeWriter's constructor.`);
+        }
+        this.options.endBlock(this, code);
         return this;
     }
 
@@ -189,9 +219,8 @@ export class CodeWriter {
         if (!this.options.singleLineComment) {
             throw new Error(`Formatter for a single line comment needs to be defined in the CodeWriter's constructor.`);
         }
-        const formattedComments = (comments || [])
-            .map(c => this.options.singleLineComment ? this.options.singleLineComment(c) : '');
-        this.line(...formattedComments);
+        const commentFn = this.options.singleLineComment;
+        (comments || []).forEach(comment => commentFn(this, comment));
         return this;
     }
 
@@ -205,8 +234,7 @@ export class CodeWriter {
         if (!this.options.multiLineComment) {
             throw new Error(`Formatter for a multi line comment needs to be defined in the CodeWriter's constructor.`);
         }
-        const formattedComments = this.options.multiLineComment(comments || []);
-        this.line(...formattedComments);
+        this.options.multiLineComment(this, comments);
         return this;
     }
 
@@ -217,30 +245,3 @@ export class CodeWriter {
         return this.code.join(os.EOL);
     }
 }
-
-/**
- * Options to initialize and configure the behavior of a CodeWriter instance.
- */
-export interface CodeWriterOptions {
-    /**
-     * Optional code to initialize the CodeWriter with.
-     */
-    initialCode?: InitialCode;
-
-    /**
-     * The indentation size in spaces. Defaults to 4 if not specified.
-     */
-    indentSize?: number;
-
-    /**
-     * Function that can format a given string as a language-specific single-line comment.
-     */
-    singleLineComment?: (comment: string) => string;
-
-    /**
-     * Function that can format a given string array as a language-specific multi-line comment.
-     */
-    multiLineComment?: (comments: string[]) => string[];
-}
-
-export type InitialCode = string | string[] | CodeWriter | undefined;

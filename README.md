@@ -37,33 +37,79 @@ All options are optional and have defaults.
 
 | Option | Type | Default | Description |
 |---------|---------|---------|---------|
-|**indentSize**|number|4|Size of the code indentation, in number of spaces|
-|**initialCode**|Multiple types|-|Code to initialize the CodeWriter with. Could be a string, string[] or another CodeWriter instance.|
-|**singleLineComment**|function|-|Function that accepts a string and returns a string formatted like a single-line comment in the intended language. If not specified, CodeWriter will throw an exception if you try to call the `comment` method.|
-|**multiLineComment**|function|-|Function that accepts a string array and returns a string array where each item is formatted like a multi-line comment in the intended language. If not specified, CodeWriter will throw an exception if you try to call the `multiLineComment` method.|
+|**indentSize**|`number`|4|Size of the code indentation, in number of spaces|
+|**initialCode**|Multiple types|-|Code to initialize the CodeWriter with. Could be a `string`, `string[]` or another `CodeWriter` instance.|
+|**singleLineComment**|`function`|-|Function that accepts a `CodeWriter` instance and a comment string and writes out a single-line comment in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `comment` method.|
+|**multiLineComment**|`function`|-|Function that accepts a `CodeWriter` instance and a string array containing multiple comments, and writes out  a multi-line comment in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `multiLineComment` method.|
+|**startBlock**|`function`|-|Function that accepts a `CodeWriter` instance and an optional code, and writes out a opening block in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `startBlock` method.|
+|**endBlock**|`function`|-|Function that accepts a `CodeWriter` instance and an optional code, and writes out a closing block in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `endBlock` method.|
 
-Examples of the `singleLineComment` and `multiLineComment` are shown below (for generating JavaScript-style comments):
+Examples are shown below (for generating JavaScript code):
 ```js
-options.singleLineComment = c => '// ' + c;
+// Outputs this type of
+// comment when the CodeWriter.comment
+// method is called.
+options.singleLineComment = (writer, comment) => {
+    writer.line(`// ${comment}`);
+};
 
-options.multiLineComment = comments => []
-    .concat('/*')
-    .concat(comments.map(c => '  ' + c))
-    .concat('*/');
+/*
+ * Outputs this type of
+ * comment when the CodeWriter.multiLineComment
+ * method is called.
+ */
+options.multiLineComment = (writer, comments) => {
+    writer.line('/*')
+        .repeat(comments || [], (cw, comment) => {
+            cw.line(` * ${comment}`);
+        })
+        .line(' */');
+};
+
+options.startBlock = (writer, code) => {
+    writer.inline(`${code} `, !!code).inline('{').done()
+        .indent();
+};
+
+options.endBlock = (writer, code) => {
+    writer.unindent('}');
+};
 ```
 
 ## Example
-Generate a empty C# console program:
-```ts
-import { CodeWriter, CodeWriterOptions } from 'codewriter';
+Generate the following empty C# console program:
+```cs
+/*
+   Automatically generated using CodeWriter
+   Copyright (c) 2017
+   All rights reserved
+*/
 
-const options: CodeWriterOptions = {
-    indentSize: 4,
-    singleLineComment:c => '// ' + c
-};
-const writer = new CodeWriter(options);
+using System;
+
+namespace ConsoleProgram
+{
+    internal static class Program
+    {
+        private static void Main(string[] args)
+        {
+            // Your code goes here
+        }
+    }
+}
+```
+
+Without language-specific options configured:
+```ts
+import { CodeWriter } from 'codewriter';
+
+const writer = new CodeWriter();
 writer
-    .comment(`Automatically generated using CodeWriter`)
+    .line(`/*`)
+    .line(`   Automatically generated using CodeWriter`)
+    .line(`   Copyright (c) 2017`)
+    .line(`   All rights reserved.`)
+    .line(`*/`)
     .blank()
     .line(`using System;`)
     .blank()
@@ -76,10 +122,37 @@ writer
             .line(`private static void Main(string[] args)`)
             .line(`{`)
             .indent()
-                .comment(`Your code goes here`)
+                .line(`// Your code goes here`)
             .unindent(`}`)
         .unindent(`}`)
     .unindent(`}`);
+const code: string = writer.toCode();
+```
+
+With language-specific options configured:
+```ts
+import { CodeWriter, CodeWriterOptions } from 'codewriter';
+
+const options: CodeWriterOptions = {
+    // Configure for C# language conventions
+};
+const writer = new CodeWriter(options);
+writer
+    .multiLineComment(
+        `Automatically generated using CodeWriter`,
+        `Copyright (c) 2017`,
+        `All rights reserved`
+    )
+    .blank()
+    .line(`using System;`)
+    .blank()
+    .startBlock(`namespace ConsoleProgram`)
+        .startBlock(`internal static class Program`)
+            .startBlock(`private static void Main(string[] args)`)
+                .comment(`// Your code goes here`)
+            .endBlock()
+        .endBlock()
+    .endBlock();
 const code: string = writer.toCode();
 ```
 

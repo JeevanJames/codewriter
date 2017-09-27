@@ -1,3 +1,4 @@
+import { CodeWriterOptions } from './code-writer-options';
 export declare class CodeWriter {
     private code;
     private currentLine;
@@ -20,6 +21,20 @@ export declare class CodeWriter {
      * @param {string} code - If specified, code is added after unindenting.
      */
     unindent(code?: string): this;
+    /**
+     * Writes an opening block. The logic to write the block is language-specific and should be
+     * configured in the options.startBlock property.
+     * @param {string} code Optional code that can be part of the block. This may be used for
+     * certain languages and ignored for others.
+     */
+    startBlock(code?: string): this;
+    /**
+     * Writes a closing block. The logic to write the block is language-specific and should be
+     * configured in the options.endBlock property.
+     * @param {string} code Optional code that can be part of the block. This may be used for
+     * certain languages and ignored for others.
+     */
+    endBlock(code?: string): this;
     /**
      * Writes one or more lines of indented code.
      * @param {string[]} code - One or more lines of code to write.
@@ -100,25 +115,3 @@ export declare class CodeWriter {
      */
     toCode(): string;
 }
-/**
- * Options to initialize and configure the behavior of a CodeWriter instance.
- */
-export interface CodeWriterOptions {
-    /**
-     * Optional code to initialize the CodeWriter with.
-     */
-    initialCode?: InitialCode;
-    /**
-     * The indentation size in spaces. Defaults to 4 if not specified.
-     */
-    indentSize?: number;
-    /**
-     * Function that can format a given string as a language-specific single-line comment.
-     */
-    singleLineComment?: (comment: string) => string;
-    /**
-     * Function that can format a given string array as a language-specific multi-line comment.
-     */
-    multiLineComment?: (comments: string[]) => string[];
-}
-export declare type InitialCode = string | string[] | CodeWriter | undefined;

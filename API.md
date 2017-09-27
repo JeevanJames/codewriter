@@ -7,6 +7,8 @@
     * [new CodeWriter(options)](#new_CodeWriter_new)
     * [.indent(code)](#CodeWriter+indent)
     * [.unindent(code)](#CodeWriter+unindent)
+    * [.startBlock(code)](#CodeWriter+startBlock)
+    * [.endBlock(code)](#CodeWriter+endBlock)
     * [.line(...code)](#CodeWriter+line)
     * [.lineIf(condition, ...code)](#CodeWriter+lineIf)
     * [.inline(code, condition)](#CodeWriter+inline)
@@ -51,6 +53,28 @@ Unindents the current indent level.
 | Param | Type | Description |
 | --- | --- | --- |
 | code | <code>string</code> | If specified, code is added after unindenting. |
+
+<a name="CodeWriter+startBlock"></a>
+
+### codeWriter.startBlock(code)
+Writes an opening block. The logic to write the block is language-specific and should beconfigured in the options.startBlock property.
+
+**Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | Optional code that can be part of the block. This may be used for certain languages and ignored for others. |
+
+<a name="CodeWriter+endBlock"></a>
+
+### codeWriter.endBlock(code)
+Writes a closing block. The logic to write the block is language-specific and should beconfigured in the options.endBlock property.
+
+**Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| code | <code>string</code> | Optional code that can be part of the block. This may be used for certain languages and ignored for others. |
 
 <a name="CodeWriter+line"></a>
 

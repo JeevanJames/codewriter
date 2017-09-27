@@ -1,4 +1,5 @@
 # Project-specific
+src/*.js
 test-harness/index.js
 
 # Logs
