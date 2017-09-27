@@ -35,6 +35,7 @@ const code: string = writer.toCode();
 CodeWriter allows some options to be specified in the constructor to customize how the code is generated.
 
 [Options reference](docs/options.md)
+
 [Sample options for generating JavaScript code](docs/options-example.md)
 
 ## Examples
