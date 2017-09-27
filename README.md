@@ -77,7 +77,7 @@ options.endBlock = (writer, code) => {
 ```
 
 ## Examples
-[Empty C# console program][docs/example-csharp-empty-console.md]
+[Empty C# console program](docs/example-csharp-empty-console.md)
 
 ## API reference
 [JSDoc Documentation](docs/API.md)
