@@ -1,4 +1,5 @@
 # CodeWriter options
+All options are optional and have defaults.
 
 | Option | Type | Default | Description |
 |---------|---------|---------|---------|
