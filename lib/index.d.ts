@@ -25,18 +25,27 @@ export declare class CodeWriter {
      * @param {string[]} code - One or more lines of code to write.
      */
     line(...code: string[]): this;
+    /**
+     * Writes one or more lines of indented code, only if the specified condition is satisfied.
+     * @param {boolean} condition The condition to satisfy
+     * @param {string[]} code One or more lines of code to write
+     */
     lineIf(condition: boolean, ...code: string[]): this;
     /**
      * Adds code to the current line, optionally based on a condition.
-     * Calls to inline can be chained until done() is called.
+     * Calls to inline can be chained until done() is called at which point the line is written.
      * @param {string} code The code to add to the current line
      * @param {boolean} condition The condition upon which the code will be added
      */
     inline(code: string, condition: boolean): this;
     /**
-     * Indicates the completion of one or more inline() calls and outputs the current line.
+     * Indicates the completion of one or more inline() calls and writes the current line.
      */
     done(): this;
+    /**
+     * Writes a blank line.
+     * @param condition Optional condition to write the blank line
+     */
     blank(condition?: boolean): this;
     /**
      * Iterates over an array and executes the given function that builds code based on each item.
@@ -73,12 +82,18 @@ export declare class CodeWriter {
      */
     funcIf(condition: boolean, builderFn: (cw: this, ...args: Object[]) => void, ...args: Object[]): this;
     /**
-     * Constructs a comment string and generates code for it.
+     * Constructs a single line comment string and generates code for it.
      * The options.singleLineComment property must be assigned for the CodeWriter to know how to
      * construct the comment string.
      * @param comments
      */
     comment(...comments: string[]): this;
+    /**
+     * Constructs a multi line comment string and generates code for it.
+     * The options.multiLineComment property must be assigned for the CodeWriter to know how to
+     * construct the comment string.
+     * @param comments
+     */
     multiLineComment(...comments: string[]): this;
     /**
      * Returns the currently built code as a string

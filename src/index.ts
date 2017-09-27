@@ -70,6 +70,11 @@ export class CodeWriter {
         return this;
     }
 
+    /**
+     * Writes one or more lines of indented code, only if the specified condition is satisfied.
+     * @param {boolean} condition The condition to satisfy
+     * @param {string[]} code One or more lines of code to write
+     */
     public lineIf(condition: boolean, ...code: string[]): this {
         if (condition) {
             this.line(...code);
@@ -79,7 +84,7 @@ export class CodeWriter {
 
     /**
      * Adds code to the current line, optionally based on a condition.
-     * Calls to inline can be chained until done() is called.
+     * Calls to inline can be chained until done() is called at which point the line is written.
      * @param {string} code The code to add to the current line
      * @param {boolean} condition The condition upon which the code will be added
      */
@@ -91,7 +96,7 @@ export class CodeWriter {
     }
 
     /**
-     * Indicates the completion of one or more inline() calls and outputs the current line.
+     * Indicates the completion of one or more inline() calls and writes the current line.
      */
     public done(): this {
         if (this.currentLine) {
@@ -101,6 +106,10 @@ export class CodeWriter {
         return this;
     }
 
+    /**
+     * Writes a blank line.
+     * @param condition Optional condition to write the blank line
+     */
     public blank(condition?: boolean): this {
         if (condition === undefined || (condition !== undefined && condition)) {
             this.code.push('');
@@ -171,7 +180,7 @@ export class CodeWriter {
     }
 
     /**
-     * Constructs a comment string and generates code for it.
+     * Constructs a single line comment string and generates code for it.
      * The options.singleLineComment property must be assigned for the CodeWriter to know how to
      * construct the comment string.
      * @param comments
@@ -186,6 +195,12 @@ export class CodeWriter {
         return this;
     }
 
+    /**
+     * Constructs a multi line comment string and generates code for it.
+     * The options.multiLineComment property must be assigned for the CodeWriter to know how to
+     * construct the comment string.
+     * @param comments
+     */
     public multiLineComment(...comments: string[]): this {
         if (!this.options.multiLineComment) {
             throw new Error(`Formatter for a multi line comment needs to be defined in the CodeWriter's constructor.`);

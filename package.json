@@ -1,14 +1,15 @@
 {
     "name": "codewriter",
-    "version": "1.0.1-beta.1",
+    "version": "1.1.0-beta.1",
     "description": "Fluent Node library for generating code blocks.",
     "main": "index.js",
     "scripts": {
         "watch": "tsc --watch",
         "build": "tsc",
         "lint": "tslint --project tsconfig.json --format verbose",
+        "docs": "npm run build && jsdoc2md ./lib/index.js > API.md",
         "bump": "npm version prerelease --no-git-tag-version",
-        "prepublishOnly": "npm run build && npm run lint",
+        "prepublishOnly": "npm run build && npm run lint && npm run docs",
         "postpublish": "npm run bump"
     },
     "typings": "./lib/index.d.ts",
@@ -29,6 +30,7 @@
     "homepage": "https://github.com/JeevanJames/codewriter#readme",
     "devDependencies": {
         "@types/node": "^8.0.30",
+        "jsdoc-to-markdown": "^3.0.0",
         "tslint": "^5.7.0",
         "typescript": "^2.5.2"
     }
