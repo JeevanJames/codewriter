@@ -1,5 +1,8 @@
 import * as os from 'os';
 
+/**
+ * Provides methods to build code blocks.
+ */
 export class CodeWriter {
     private code: string[];
 
@@ -285,10 +288,15 @@ export type MultiLineCommentFn = (cw: CodeWriter, comments: string[]) => void;
 export type StartBlockFn = (cw: CodeWriter, code?: string) => void;
 export type EndBlockFn = (cw: CodeWriter, code?: string) => void;
 
+/**
+ * Provides pre-defined option sets for common languages and language families.
+ */
 export class OptionsLibrary {
-    public static cLanguageFamily(prefs?: {
-        braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
-    }): CodeWriterOptions {
+    /**
+     * Returns options that apply to the C family of languages, including C/C++, C#, Java, etc.
+     * @param {Object} prefs Fine-grained preferences for generating the options
+     */
+    public static cLanguageFamily(prefs?: CLanguageFamilyPrefs): CodeWriterOptions {
         prefs = prefs || {};
         const options: CodeWriterOptions = {
             singleLineComment: (writer, comment) => {
@@ -325,27 +333,61 @@ export class OptionsLibrary {
         return options;
     }
 
+    /**
+     * Returns options that apply to the C language
+     */
+    public static get c(): CodeWriterOptions {
+        return OptionsLibrary.cLanguageFamily({
+            braceLayout: 'endOfLine',
+        });
+    }
+
+    /**
+     * Returns options that apply to the C++ language
+     */
+    public static get cpp(): CodeWriterOptions {
+        return OptionsLibrary.cLanguageFamily({
+            braceLayout: 'endOfLine',
+        });
+    }
+
+    /**
+     * Returns options that apply to the C# language
+     */
     public static get csharp(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
             braceLayout: 'nextLine',
         });
     }
 
+    /**
+     * Returns options that apply to the Java language
+     */
     public static get java(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
     }
 
+    /**
+     * Returns options that apply to the JavaScript language
+     */
     public static get javascript(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
     }
 
+    /**
+     * Returns options that apply to the Typescript language
+     */
     public static get typescript(): CodeWriterOptions {
         return OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
     }
+}
+
+export interface CLanguageFamilyPrefs {
+    braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
 }

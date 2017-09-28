@@ -1,6 +1,19 @@
+## Classes
+
+<dl>
+<dt><a href="#CodeWriter">CodeWriter</a></dt>
+<dd><p>Provides methods to build code blocks.</p>
+</dd>
+<dt><a href="#OptionsLibrary">OptionsLibrary</a></dt>
+<dd><p>Provides pre-defined option sets for common languages and language families.</p>
+</dd>
+</dl>
+
 <a name="CodeWriter"></a>
 
 ## CodeWriter
+Provides methods to build code blocks.
+
 **Kind**: global class  
 
 * [CodeWriter](#CodeWriter)
@@ -204,3 +217,66 @@ Constructs a multi line comment string and generates code for it.The options.mu
 Returns the currently built code as a string
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+<a name="OptionsLibrary"></a>
+
+## OptionsLibrary
+Provides pre-defined option sets for common languages and language families.
+
+**Kind**: global class  
+
+* [OptionsLibrary](#OptionsLibrary)
+    * [.c](#OptionsLibrary.c)
+    * [.cpp](#OptionsLibrary.cpp)
+    * [.csharp](#OptionsLibrary.csharp)
+    * [.java](#OptionsLibrary.java)
+    * [.javascript](#OptionsLibrary.javascript)
+    * [.typescript](#OptionsLibrary.typescript)
+    * [.cLanguageFamily(prefs)](#OptionsLibrary.cLanguageFamily)
+
+<a name="OptionsLibrary.c"></a>
+
+### OptionsLibrary.c
+Returns options that apply to the C language
+
+**Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+<a name="OptionsLibrary.cpp"></a>
+
+### OptionsLibrary.cpp
+Returns options that apply to the C++ language
+
+**Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+<a name="OptionsLibrary.csharp"></a>
+
+### OptionsLibrary.csharp
+Returns options that apply to the C# language
+
+**Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+<a name="OptionsLibrary.java"></a>
+
+### OptionsLibrary.java
+Returns options that apply to the Java language
+
+**Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+<a name="OptionsLibrary.javascript"></a>
+
+### OptionsLibrary.javascript
+Returns options that apply to the JavaScript language
+
+**Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+<a name="OptionsLibrary.typescript"></a>
+
+### OptionsLibrary.typescript
+Returns options that apply to the Typescript language
+
+**Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+<a name="OptionsLibrary.cLanguageFamily"></a>
+
+### OptionsLibrary.cLanguageFamily(prefs)
+Returns options that apply to the C family of languages, including C/C++, C#, Java, etc.
+
+**Kind**: static method of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| prefs | <code>Object</code> | Fine-grained preferences for generating the options |
+

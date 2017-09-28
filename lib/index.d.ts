@@ -1,3 +1,6 @@
+/**
+ * Provides methods to build code blocks.
+ */
 export declare class CodeWriter {
     private code;
     private currentLine;
@@ -148,12 +151,40 @@ export declare type SingleLineCommentFn = (cw: CodeWriter, comment: string) => v
 export declare type MultiLineCommentFn = (cw: CodeWriter, comments: string[]) => void;
 export declare type StartBlockFn = (cw: CodeWriter, code?: string) => void;
 export declare type EndBlockFn = (cw: CodeWriter, code?: string) => void;
+/**
+ * Provides pre-defined option sets for common languages and language families.
+ */
 export declare class OptionsLibrary {
-    static cLanguageFamily(prefs?: {
-        braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
-    }): CodeWriterOptions;
+    /**
+     * Returns options that apply to the C family of languages, including C/C++, C#, Java, etc.
+     * @param {Object} prefs Fine-grained preferences for generating the options
+     */
+    static cLanguageFamily(prefs?: CLanguageFamilyPrefs): CodeWriterOptions;
+    /**
+     * Returns options that apply to the C language
+     */
+    static readonly c: CodeWriterOptions;
+    /**
+     * Returns options that apply to the C++ language
+     */
+    static readonly cpp: CodeWriterOptions;
+    /**
+     * Returns options that apply to the C# language
+     */
     static readonly csharp: CodeWriterOptions;
+    /**
+     * Returns options that apply to the Java language
+     */
     static readonly java: CodeWriterOptions;
+    /**
+     * Returns options that apply to the JavaScript language
+     */
     static readonly javascript: CodeWriterOptions;
+    /**
+     * Returns options that apply to the Typescript language
+     */
     static readonly typescript: CodeWriterOptions;
+}
+export interface CLanguageFamilyPrefs {
+    braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
 }
