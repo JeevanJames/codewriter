@@ -8,6 +8,7 @@ export class CodeWriter {
 
     private currentLine: string = '';
     private currentIndent: number = 0;
+    private condition: boolean;
 
     private options: CodeWriterOptions;
     private indentSize: number;
@@ -95,6 +96,9 @@ export class CodeWriter {
      * @param {string[]} code - One or more lines of code to write.
      */
     public line(...code: string[]): this {
+        if (this.condition != undefined && !this.condition) {
+            return this;
+        }
         for (let i = 0; i < (code || []).length; i++) {
             this.code.push(' '.repeat(this.currentIndent) + code[i]);
         }
@@ -130,6 +134,10 @@ export class CodeWriter {
      * Indicates the completion of one or more inline() calls and writes the current line.
      */
     public done(): this {
+        if (this.condition != undefined && !this.condition) {
+            this.currentLine = '';
+            return this;
+        }
         if (this.currentLine) {
             this.code.push(' '.repeat(this.currentIndent) + this.currentLine);
             this.currentLine = '';
@@ -142,6 +150,9 @@ export class CodeWriter {
      * @param condition Optional condition to write the blank line
      */
     public blank(condition?: boolean): this {
+        if (this.condition != undefined && !this.condition) {
+            return this;
+        }
         if (condition === undefined || (condition !== undefined && condition)) {
             this.code.push('');
         }
@@ -244,6 +255,19 @@ export class CodeWriter {
             throw new Error(`Formatter for a doc comment needs to be defined in the CodeWriter's constructor.`);
         }
         this.options.docComment(this, comments);
+        return this;
+    }
+
+    public if(condition: boolean): this {
+        if (this.condition != undefined) {
+            throw new Error(`If condition already exists. Nested conditions not supported.`);
+        }
+        this.condition = condition;
+        return this;
+    }
+
+    public endIf(): this {
+        this.condition = undefined;
         return this;
     }
 

@@ -5,6 +5,7 @@ export declare class CodeWriter {
     private code;
     private currentLine;
     private currentIndent;
+    private condition;
     private options;
     private indentSize;
     /**
@@ -112,6 +113,9 @@ export declare class CodeWriter {
      * @param comments
      */
     multiLineComment(...comments: string[]): this;
+    docComment(...comments: string[]): this;
+    if(condition: boolean): this;
+    endIf(): this;
     /**
      * Returns the currently built code as a string
      */
@@ -137,6 +141,7 @@ export interface CodeWriterOptions {
      * Function that can format a given string array as a language-specific multi-line comment.
      */
     multiLineComment?: MultiLineCommentFn;
+    docComment?: DocCommentFn;
     /**
      * Function that can write out a start block.
      */
@@ -147,10 +152,11 @@ export interface CodeWriterOptions {
     endBlock?: EndBlockFn;
 }
 export declare type InitialCode = string | string[] | CodeWriter | undefined;
-export declare type SingleLineCommentFn = (cw: CodeWriter, comment: string) => void;
-export declare type MultiLineCommentFn = (cw: CodeWriter, comments: string[]) => void;
-export declare type StartBlockFn = (cw: CodeWriter, code?: string) => void;
-export declare type EndBlockFn = (cw: CodeWriter, code?: string) => void;
+export declare type SingleLineCommentFn = (writer: CodeWriter, comment: string) => void;
+export declare type MultiLineCommentFn = (writer: CodeWriter, comments: string[]) => void;
+export declare type DocCommentFn = (writer: CodeWriter, comments: string[]) => void;
+export declare type StartBlockFn = (writer: CodeWriter, code?: string) => void;
+export declare type EndBlockFn = (writer: CodeWriter, code?: string) => void;
 /**
  * Provides pre-defined option sets for common languages and language families.
  */
@@ -184,6 +190,8 @@ export declare class OptionsLibrary {
      * Returns options that apply to the Typescript language
      */
     static readonly typescript: CodeWriterOptions;
+    private static getCppCommentFn();
+    private static getJsDocCommentFn();
 }
 export interface CLanguageFamilyPrefs {
     braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
