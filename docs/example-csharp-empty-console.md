@@ -54,11 +54,9 @@ const code: string = writer.toCode();
 
 ## With language-specific options configured
 ```ts
-import { CodeWriter, CodeWriterOptions } from 'codewriter';
+import { CodeWriter, CodeWriterOptions, LanguageOptions } from 'codewriter';
 
-const options: CodeWriterOptions = {
-    // Configure for C# language conventions
-};
+const options: CodeWriterOptions = LanguageOptions.csharp;
 const writer = new CodeWriter(options);
 writer
     .multiLineComment(

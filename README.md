@@ -39,7 +39,7 @@ CodeWriter allows some options to be specified in the constructor to customize h
 [Sample options for generating JavaScript code](docs/options-example.md)
 
 ## Examples
-[Empty C# console program](docs/example-csharp-empty-console.md)
+[Generate empty C# console program](docs/example-csharp-empty-console.md)
 
 ## API reference
 [JSDoc Documentation](docs/API.md)
