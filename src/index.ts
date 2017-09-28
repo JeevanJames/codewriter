@@ -239,6 +239,14 @@ export class CodeWriter {
         return this;
     }
 
+    public docComment(...comments: string[]): this {
+        if (!this.options.docComment) {
+            throw new Error(`Formatter for a doc comment needs to be defined in the CodeWriter's constructor.`);
+        }
+        this.options.docComment(this, comments);
+        return this;
+    }
+
     /**
      * Returns the currently built code as a string
      */
@@ -271,6 +279,8 @@ export interface CodeWriterOptions {
      */
     multiLineComment?: MultiLineCommentFn;
 
+    docComment?: DocCommentFn;
+
     /**
      * Function that can write out a start block.
      */
@@ -283,10 +293,11 @@ export interface CodeWriterOptions {
 }
 
 export type InitialCode = string | string[] | CodeWriter | undefined;
-export type SingleLineCommentFn = (cw: CodeWriter, comment: string) => void;
-export type MultiLineCommentFn = (cw: CodeWriter, comments: string[]) => void;
-export type StartBlockFn = (cw: CodeWriter, code?: string) => void;
-export type EndBlockFn = (cw: CodeWriter, code?: string) => void;
+export type SingleLineCommentFn = (writer: CodeWriter, comment: string) => void;
+export type MultiLineCommentFn = (writer: CodeWriter, comments: string[]) => void;
+export type DocCommentFn = (writer: CodeWriter, comments: string[]) => void;
+export type StartBlockFn = (writer: CodeWriter, code?: string) => void;
+export type EndBlockFn = (writer: CodeWriter, code?: string) => void;
 
 /**
  * Provides pre-defined option sets for common languages and language families.
@@ -337,54 +348,95 @@ export class OptionsLibrary {
      * Returns options that apply to the C language
      */
     public static get c(): CodeWriterOptions {
-        return OptionsLibrary.cLanguageFamily({
+        const option = OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
+        option.docComment = OptionsLibrary.getCppCommentFn();
+        return option;
     }
 
     /**
      * Returns options that apply to the C++ language
      */
     public static get cpp(): CodeWriterOptions {
-        return OptionsLibrary.cLanguageFamily({
+        const option = OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
+        option.docComment = OptionsLibrary.getCppCommentFn();
+        return option;
     }
 
     /**
      * Returns options that apply to the C# language
      */
     public static get csharp(): CodeWriterOptions {
-        return OptionsLibrary.cLanguageFamily({
+        const options = OptionsLibrary.cLanguageFamily({
             braceLayout: 'nextLine',
         });
+        options.docComment = (writer, comments) => {
+            writer
+                .line(`/// <summary>`)
+                .repeat(comments || [], (cw, comment) => {
+                    cw.line(`/// ${comment}`)
+                })
+                .line(`/// </summary>`);
+        }
+        return options;
     }
 
     /**
      * Returns options that apply to the Java language
      */
     public static get java(): CodeWriterOptions {
-        return OptionsLibrary.cLanguageFamily({
+        const option = OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
+        option.docComment = OptionsLibrary.getJsDocCommentFn();
+        return option;
     }
 
     /**
      * Returns options that apply to the JavaScript language
      */
     public static get javascript(): CodeWriterOptions {
-        return OptionsLibrary.cLanguageFamily({
+        const option = OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
+        option.docComment = OptionsLibrary.getJsDocCommentFn();
+        return option;
     }
 
     /**
      * Returns options that apply to the Typescript language
      */
     public static get typescript(): CodeWriterOptions {
-        return OptionsLibrary.cLanguageFamily({
+        const option = OptionsLibrary.cLanguageFamily({
             braceLayout: 'endOfLine',
         });
+        option.docComment = OptionsLibrary.getJsDocCommentFn();
+        return option;
+    }
+
+    private static getCppCommentFn(): DocCommentFn {
+        return (writer, comments) => {
+            writer
+                .line(`/**`)
+                .repeat(comments || [], (cw, comment) => {
+                    cw.line(`    ${comment}`);
+                })
+                .line(`*/`);
+        }
+    }
+
+    private static getJsDocCommentFn(): DocCommentFn {
+        return (writer, comments) => {
+            writer
+                .line(`/**`)
+                .repeat(comments || [], (cw, comment) => {
+                    cw.line(` * ${comment}`);
+                })
+                .line(` */`);
+        }
     }
 }
 

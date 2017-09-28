@@ -14,6 +14,7 @@ writer
     .blank()
     .startBlock(`namespace ConsoleProgram`)
         .startBlock(`internal static class Program`)
+            .docComment(`Application entry-point.`)
             .startBlock(`private static void Main(string[] args)`)
                 .comment(`Your code goes here`)
             .endBlock()
