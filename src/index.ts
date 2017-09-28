@@ -8,7 +8,7 @@ export class CodeWriter {
 
     private currentLine: string = '';
     private currentIndent: number = 0;
-    private condition: boolean;
+    private condition: boolean | undefined;
 
     private options: CodeWriterOptions;
     private indentSize: number;
@@ -401,10 +401,10 @@ export class OptionsLibrary {
             writer
                 .line(`/// <summary>`)
                 .repeat(comments || [], (cw, comment) => {
-                    cw.line(`/// ${comment}`)
+                    cw.line(`/// ${comment}`);
                 })
                 .line(`/// </summary>`);
-        }
+        };
         return options;
     }
 
@@ -449,7 +449,7 @@ export class OptionsLibrary {
                     cw.line(`    ${comment}`);
                 })
                 .line(`*/`);
-        }
+        };
     }
 
     private static getJsDocCommentFn(): DocCommentFn {
@@ -460,7 +460,7 @@ export class OptionsLibrary {
                     cw.line(` * ${comment}`);
                 })
                 .line(` */`);
-        }
+        };
     }
 }
 
