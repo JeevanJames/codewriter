@@ -1,11 +1,36 @@
 # CodeWriter options
-All options are optional and have defaults. Click [here](options-example.md) to see a sample options set-up for generating JavaScript code.
+All options properties are optional and have defaults. Click [here](options-example.md) to see a sample options set-up for generating JavaScript code.
 
-| Option | Type | Default | Description |
-|---------|---------|---------|---------|
-|**indentSize**|`number`|4|Size of the code indentation, in number of spaces|
-|**initialCode**|Multiple types|-|Code to initialize the CodeWriter with. Could be a `string`, `string[]` or another `CodeWriter` instance.|
-|**singleLineComment**|`function`|-|Function that accepts a `CodeWriter` instance and a comment string and writes out a single-line comment in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `comment` method.|
-|**multiLineComment**|`function`|-|Function that accepts a `CodeWriter` instance and a string array containing multiple comments, and writes out  a multi-line comment in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `multiLineComment` method.|
-|**startBlock**|`function`|-|Function that accepts a `CodeWriter` instance and an optional code, and writes out a opening block in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `startBlock` method.|
-|**endBlock**|`function`|-|Function that accepts a `CodeWriter` instance and an optional code, and writes out a closing block in the intended language. If not specified, `CodeWriter` will throw an exception if you try to call the `endBlock` method.|
+The framework also provides an `OptionsLibrary` class that has methods and properties to generate pre-defined options specific to common languages and language familities.
+
+## indentSize
+Type: `number`
+
+Default: `4`
+
+Number of spaces a tab is equal to.
+
+## initialCode
+Type: `string | string[] | CodeWriter`
+
+Code to initialize the CodeWriter.
+
+## singleLineComment
+Type: `(writer: CodeWriter, comment: string) => void`
+
+Specifies how to generate a language-specific single line comment.
+
+## multiLineComment
+Type: `(writer: CodeWriter, comments: string[]) => void`
+
+Specifies how to generate a language-specific multi-line comment.
+
+## startBlock
+Type: `(writer: CodeWriter, code?: string) => void`
+
+Specifies how to generate a language-specific starting code block.
+
+## endBlock
+Type: `(writer: CodeWriter, code?: string) => void`
+
+Specifies how to generate a language-specific ending code block.
