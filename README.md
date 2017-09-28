@@ -59,9 +59,14 @@ npm install
 # Build code
 npm run build
 
+# Continuously watch for code changes and build
+npm run watch
+
 # Lint code
 npm run lint
 
-# Continuously watch for code changes and build
-npm run watch
+# The codebase has a test-harness directory that contains an index.ts file.
+# You can update this file to quickly test code against the framework.
+# To run the test-harness, run the following command:
+npm run test-harness
 ```
