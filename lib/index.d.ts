@@ -81,7 +81,7 @@ export declare class CodeWriter {
      */
     iterate(obj: {
         [k: string]: Object;
-    }, fn: (cw: this, item: Object, k: string) => void): this;
+    }, fn: (cw: this, item: Object, k: string, i: number) => void): this;
     /**
      * Calls a function passing in the CodeWriter instance and additional arguments.
      * Allows you to generate code based on complex logic, which is not possible using the fluent API.
