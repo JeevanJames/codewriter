@@ -179,10 +179,11 @@ export class CodeWriter {
      * @param {Function} fn The function to call for each item. The parameters are the CodeWriter
      * instance, the item and the index of the item in the array.
      */
-    public iterate(obj: { [k: string]: Object }, fn: (cw: this, item: Object, k: string) => void): this {
+    public iterate(obj: { [k: string]: Object }, fn: (cw: this, item: Object, k: string, i: number) => void): this {
+        let index = 0;
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
-                fn(this, obj[key], key);
+                fn(this, obj[key], key, index++);
             }
         }
         return this;
