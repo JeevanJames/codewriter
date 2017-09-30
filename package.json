@@ -23,7 +23,7 @@
         "writer",
         "builder"
     ],
-    "author": "Jeevan James",
+    "author": "Jeevan James <jeevanjj@live.com>",
     "license": "Apache-2.0",
     "bugs": {
         "url": "https://github.com/JeevanJames/codewriter/issues"
