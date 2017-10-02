@@ -59,6 +59,7 @@ const code: string = writer.toCode();
 ```
 
 ## With language-specific options configured
+Notice the use of methods `multiLineComment`, `comment`, `docComment`, `startBlock` and `endBlock`. These methods are enabled only once the language-specific options are configured.
 ```ts
 import { CodeWriter, CodeWriterOptions, LanguageOptions } from 'codewriter';
 
