@@ -110,6 +110,8 @@ export declare class CodeWriter {
      * Constructs a multi line comment string and generates code for it.
      * The options.multiLineComment property must be assigned for the CodeWriter to know how to
      * construct the comment string.
+     * If the option property is not assigned, the method attempts to use the
+     * options.singleLineComment property to generate multiple single line comments.
      * @param comments
      */
     multiLineComment(...comments: string[]): this;
@@ -186,6 +188,10 @@ export declare class OptionsLibrary {
      * Returns options that apply to the JavaScript language
      */
     static readonly javascript: CodeWriterOptions;
+    /**
+     * Returns options that apply to the Python language
+     */
+    static readonly python: CodeWriterOptions;
     /**
      * Returns options that apply to the Typescript language
      */

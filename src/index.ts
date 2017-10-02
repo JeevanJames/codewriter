@@ -456,12 +456,18 @@ export class OptionsLibrary {
                 .lineIf(!!comments && comments.length > 1, `"""`);
             },
 
-            startBlock: (writer) => {
+            startBlock: (writer, code) => {
+                if (code) {
+                    writer.line(code);
+                }
                 writer.indent();
             },
 
-            endBlock: (writer) => {
+            endBlock: (writer, code) => {
                 writer.unindent();
+                if (code) {
+                    writer.line(code);
+                }
             },
         };
         return options;

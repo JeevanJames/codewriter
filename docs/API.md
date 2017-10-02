@@ -203,7 +203,7 @@ Constructs a single line comment string and generates code for it.The options.s
 <a name="CodeWriter+multiLineComment"></a>
 
 ### codeWriter.multiLineComment(...comments)
-Constructs a multi line comment string and generates code for it.The options.multiLineComment property must be assigned for the CodeWriter to know how toconstruct the comment string.
+Constructs a multi line comment string and generates code for it.The options.multiLineComment property must be assigned for the CodeWriter to know how toconstruct the comment string.If the option property is not assigned, the method attempts to use theoptions.singleLineComment property to generate multiple single line comments.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
 
@@ -230,6 +230,7 @@ Provides pre-defined option sets for common languages and language families.
     * [.csharp](#OptionsLibrary.csharp)
     * [.java](#OptionsLibrary.java)
     * [.javascript](#OptionsLibrary.javascript)
+    * [.python](#OptionsLibrary.python)
     * [.typescript](#OptionsLibrary.typescript)
     * [.cLanguageFamily(prefs)](#OptionsLibrary.cLanguageFamily)
 
@@ -261,6 +262,12 @@ Returns options that apply to the Java language
 
 ### OptionsLibrary.javascript
 Returns options that apply to the JavaScript language
+
+**Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
+<a name="OptionsLibrary.python"></a>
+
+### OptionsLibrary.python
+Returns options that apply to the Python language
 
 **Kind**: static property of [<code>OptionsLibrary</code>](#OptionsLibrary)  
 <a name="OptionsLibrary.typescript"></a>

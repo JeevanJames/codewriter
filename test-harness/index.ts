@@ -1,6 +1,6 @@
 import { CodeWriter, CodeWriterOptions, OptionsLibrary } from '../src';
 
-const options: CodeWriterOptions = OptionsLibrary.csharp;
+const options: CodeWriterOptions = OptionsLibrary.python;
 const writer = new CodeWriter(options);
 
 writer
