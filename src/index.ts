@@ -6,10 +6,12 @@ import * as os from 'os';
 export class CodeWriter {
     private code: string[];
 
+    /* Tracking variables */
     private currentLine: string = '';
     private currentIndent: number = 0;
     private condition: boolean | undefined;
 
+    /* Options */
     private options: CodeWriterOptions;
     private indentSize: number;
     private indentType: 'spaces' | 'tabs';
@@ -39,7 +41,8 @@ export class CodeWriter {
 
     /**
      * Indents the current indent level.
-     * @param {string} code - If specified, code is added after indenting
+     * @param {string} code If specified, code is added after indenting
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public indent(code?: string): this {
         this.currentIndent += this.indentSize;
@@ -52,6 +55,7 @@ export class CodeWriter {
     /**
      * Unindents the current indent level.
      * @param {string} code - If specified, code is added after unindenting.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public unindent(code?: string): this {
         this.currentIndent -= this.indentSize;
@@ -70,6 +74,7 @@ export class CodeWriter {
      * configured in the options.startBlock property.
      * @param {string} code Optional code that can be part of the block. This may be used for
      * certain languages and ignored for others.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public startBlock(code?: string): this {
         if (!this.options.startBlock) {
@@ -84,6 +89,7 @@ export class CodeWriter {
      * configured in the options.endBlock property.
      * @param {string} code Optional code that can be part of the block. This may be used for
      * certain languages and ignored for others.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public endBlock(code?: string): this {
         if (!this.options.endBlock) {
@@ -96,6 +102,7 @@ export class CodeWriter {
     /**
      * Writes one or more lines of indented code.
      * @param {string[]} code - One or more lines of code to write.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public line(...code: string[]): this {
         // If we're in a conditional block and the condition evaluates to false, don't do anything.
@@ -103,7 +110,8 @@ export class CodeWriter {
             return this;
         }
         for (let i = 0; i < (code || []).length; i++) {
-            const indent = this.indentType === 'spaces' ? ' '.repeat(this.currentIndent) : '\t'.repeat(this.currentIndent / this.indentSize);
+            const indent = this.indentType === 'spaces' ? ' '.repeat(this.currentIndent)
+                : '\t'.repeat(this.currentIndent / this.indentSize);
             this.code.push(indent + code[i]);
         }
         return this;
@@ -113,6 +121,7 @@ export class CodeWriter {
      * Writes one or more lines of indented code, only if the specified condition is satisfied.
      * @param {boolean} condition The condition to satisfy
      * @param {string[]} code One or more lines of code to write
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public lineIf(condition: boolean, ...code: string[]): this {
         if (condition) {
@@ -126,6 +135,7 @@ export class CodeWriter {
      * Calls to inline can be chained until done() is called at which point the line is written.
      * @param {string} code The code to add to the current line
      * @param {boolean} condition The condition upon which the code will be added
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public inline(code: string, condition?: boolean): this {
         if (condition == undefined || (condition != undefined && condition)) {
@@ -136,6 +146,7 @@ export class CodeWriter {
 
     /**
      * Indicates the completion of one or more inline() calls and writes the current line.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public done(): this {
         if (this.condition != undefined && !this.condition) {
@@ -152,6 +163,7 @@ export class CodeWriter {
     /**
      * Writes a blank line.
      * @param condition Optional condition to write the blank line
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public blank(condition?: boolean): this {
         if (this.condition != undefined && !this.condition) {
@@ -168,6 +180,7 @@ export class CodeWriter {
      * @param {Array} arr The array to iterate over.
      * @param {Function} fn The function to call for each item. The parameters are the CodeWriter
      * instance, the item and the index of the item in the array.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public repeat<T>(arr: T[], fn: (cw: this, item: T, index: number, array: T[]) => void): this {
         for (let i = 0; i < (arr || []).length; i++) {
@@ -182,6 +195,7 @@ export class CodeWriter {
      * @param {Object} obj The object to iterate over
      * @param {Function} fn The function to call for each item. The parameters are the CodeWriter
      * instance, the item and the index of the item in the array.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public iterate(obj: { [k: string]: Object }, fn: (cw: this, item: Object, k: string, i: number) => void): this {
         let index = 0;
@@ -199,6 +213,7 @@ export class CodeWriter {
      * @param { Function } builderFn The function to call. The parameters are the CodeWriter
      * instance and the additional arguments.
      * @param { Object[] } args The additional arguments to pass to the function.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public func(builderFn: (cw: this, ...args: Object[]) => void, ...args: Object[]): this {
         if (!builderFn) {
@@ -215,6 +230,7 @@ export class CodeWriter {
      * @param { Function } builderFn The function to call. The parameters are the CodeWriter
      * instance and the additional arguments.
      * @param { Object[] } args The additional arguments to pass to the function.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public funcIf(condition: boolean, builderFn: (cw: this, ...args: Object[]) => void, ...args: Object[]): this {
         if (!builderFn) {
@@ -230,7 +246,8 @@ export class CodeWriter {
      * Constructs a single line comment string and generates code for it.
      * The options.singleLineComment property must be assigned for the CodeWriter to know how to
      * construct the comment string.
-     * @param comments
+     * @param {string[]} comments Comment strings to generate
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public comment(...comments: string[]): this {
         if (!this.options.singleLineComment) {
@@ -246,7 +263,8 @@ export class CodeWriter {
      * construct the comment string.
      * If the option property is not assigned, the method attempts to use the
      * options.singleLineComment property to generate multiple single line comments.
-     * @param comments
+     * @param {string[]} comments Comment strings to generate
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     public multiLineComment(...comments: string[]): this {
         if (!this.options.multiLineComment && !this.options.singleLineComment) {
@@ -284,6 +302,7 @@ export class CodeWriter {
 
     /**
      * Returns the currently built code as a string
+     * @returns {string} Currently built code
      */
     public toCode(): string {
         return this.code.join(os.EOL);

@@ -18,22 +18,22 @@ Provides methods to build code blocks.
 
 * [CodeWriter](#CodeWriter)
     * [new CodeWriter(options)](#new_CodeWriter_new)
-    * [.indent(code)](#CodeWriter+indent)
-    * [.unindent(code)](#CodeWriter+unindent)
-    * [.startBlock(code)](#CodeWriter+startBlock)
-    * [.endBlock(code)](#CodeWriter+endBlock)
-    * [.line(...code)](#CodeWriter+line)
-    * [.lineIf(condition, ...code)](#CodeWriter+lineIf)
-    * [.inline(code, condition)](#CodeWriter+inline)
-    * [.done()](#CodeWriter+done)
-    * [.blank(condition)](#CodeWriter+blank)
-    * [.repeat(arr, fn)](#CodeWriter+repeat)
-    * [.iterate(obj, fn)](#CodeWriter+iterate)
-    * [.func(builderFn, ...args)](#CodeWriter+func)
-    * [.funcIf(builderFn, ...args)](#CodeWriter+funcIf)
-    * [.comment(...comments)](#CodeWriter+comment)
-    * [.multiLineComment(...comments)](#CodeWriter+multiLineComment)
-    * [.toCode()](#CodeWriter+toCode)
+    * [.indent(code)](#CodeWriter+indent) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.unindent(code)](#CodeWriter+unindent) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.startBlock(code)](#CodeWriter+startBlock) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.endBlock(code)](#CodeWriter+endBlock) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.line(...code)](#CodeWriter+line) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.lineIf(condition, ...code)](#CodeWriter+lineIf) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.inline(code, condition)](#CodeWriter+inline) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.done()](#CodeWriter+done) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.blank(condition)](#CodeWriter+blank) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.repeat(arr, fn)](#CodeWriter+repeat) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.iterate(obj, fn)](#CodeWriter+iterate) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.func(builderFn, ...args)](#CodeWriter+func) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.funcIf(builderFn, ...args)](#CodeWriter+funcIf) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.comment(...comments)](#CodeWriter+comment) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.multiLineComment(...comments)](#CodeWriter+multiLineComment) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.toCode()](#CodeWriter+toCode) ⇒ <code>string</code>
 
 <a name="new_CodeWriter_new"></a>
 
@@ -47,10 +47,11 @@ Creates an instance of the CodeWriter class.
 
 <a name="CodeWriter+indent"></a>
 
-### codeWriter.indent(code)
+### codeWriter.indent(code) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Indents the current indent level.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -58,10 +59,11 @@ Indents the current indent level.
 
 <a name="CodeWriter+unindent"></a>
 
-### codeWriter.unindent(code)
+### codeWriter.unindent(code) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Unindents the current indent level.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -69,10 +71,11 @@ Unindents the current indent level.
 
 <a name="CodeWriter+startBlock"></a>
 
-### codeWriter.startBlock(code)
+### codeWriter.startBlock(code) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Writes an opening block. The logic to write the block is language-specific and should beconfigured in the options.startBlock property.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -80,10 +83,11 @@ Writes an opening block. The logic to write the block is language-specific and s
 
 <a name="CodeWriter+endBlock"></a>
 
-### codeWriter.endBlock(code)
+### codeWriter.endBlock(code) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Writes a closing block. The logic to write the block is language-specific and should beconfigured in the options.endBlock property.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -91,10 +95,11 @@ Writes a closing block. The logic to write the block is language-specific and sh
 
 <a name="CodeWriter+line"></a>
 
-### codeWriter.line(...code)
+### codeWriter.line(...code) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Writes one or more lines of indented code.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -102,10 +107,11 @@ Writes one or more lines of indented code.
 
 <a name="CodeWriter+lineIf"></a>
 
-### codeWriter.lineIf(condition, ...code)
+### codeWriter.lineIf(condition, ...code) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Writes one or more lines of indented code, only if the specified condition is satisfied.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -114,10 +120,11 @@ Writes one or more lines of indented code, only if the specified condition is sa
 
 <a name="CodeWriter+inline"></a>
 
-### codeWriter.inline(code, condition)
+### codeWriter.inline(code, condition) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Adds code to the current line, optionally based on a condition.Calls to inline can be chained until done() is called at which point the line is written.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -126,16 +133,18 @@ Adds code to the current line, optionally based on a condition.Calls to inline 
 
 <a name="CodeWriter+done"></a>
 
-### codeWriter.done()
+### codeWriter.done() ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Indicates the completion of one or more inline() calls and writes the current line.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 <a name="CodeWriter+blank"></a>
 
-### codeWriter.blank(condition)
+### codeWriter.blank(condition) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Writes a blank line.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Description |
 | --- | --- |
@@ -143,10 +152,11 @@ Writes a blank line.
 
 <a name="CodeWriter+repeat"></a>
 
-### codeWriter.repeat(arr, fn)
+### codeWriter.repeat(arr, fn) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Iterates over an array and executes the given function that builds code based on each item.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -155,10 +165,11 @@ Iterates over an array and executes the given function that builds code based on
 
 <a name="CodeWriter+iterate"></a>
 
-### codeWriter.iterate(obj, fn)
+### codeWriter.iterate(obj, fn) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Iterates over the properties of an object and executes the given function that builds codebased on each property.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -167,10 +178,11 @@ Iterates over the properties of an object and executes the given function that b
 
 <a name="CodeWriter+func"></a>
 
-### codeWriter.func(builderFn, ...args)
+### codeWriter.func(builderFn, ...args) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Calls a function passing in the CodeWriter instance and additional arguments.Allows you to generate code based on complex logic, which is not possible using the fluent API.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -179,10 +191,11 @@ Calls a function passing in the CodeWriter instance and additional arguments.Al
 
 <a name="CodeWriter+funcIf"></a>
 
-### codeWriter.funcIf(builderFn, ...args)
+### codeWriter.funcIf(builderFn, ...args) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Calls a function passing in the CodeWriter instance and additional arguments. The function iscalled only if the specified boolean condition is met.Allows you to generate code based on complex logic, which is not possible using the fluent API.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -191,32 +204,35 @@ Calls a function passing in the CodeWriter instance and additional arguments. Th
 
 <a name="CodeWriter+comment"></a>
 
-### codeWriter.comment(...comments)
+### codeWriter.comment(...comments) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Constructs a single line comment string and generates code for it.The options.singleLineComment property must be assigned for the CodeWriter to know how toconstruct the comment string.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
-| Param |
-| --- |
-| ...comments | 
+| Param | Type | Description |
+| --- | --- | --- |
+| ...comments | <code>Array.&lt;string&gt;</code> | Comment strings to generate |
 
 <a name="CodeWriter+multiLineComment"></a>
 
-### codeWriter.multiLineComment(...comments)
+### codeWriter.multiLineComment(...comments) ⇒ [<code>CodeWriter</code>](#CodeWriter)
 Constructs a multi line comment string and generates code for it.The options.multiLineComment property must be assigned for the CodeWriter to know how toconstruct the comment string.If the option property is not assigned, the method attempts to use theoptions.singleLineComment property to generate multiple single line comments.
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 
-| Param |
-| --- |
-| ...comments | 
+| Param | Type | Description |
+| --- | --- | --- |
+| ...comments | <code>Array.&lt;string&gt;</code> | Comment strings to generate |
 
 <a name="CodeWriter+toCode"></a>
 
-### codeWriter.toCode()
+### codeWriter.toCode() ⇒ <code>string</code>
 Returns the currently built code as a string
 
 **Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: <code>string</code> - Currently built code  
 <a name="OptionsLibrary"></a>
 
 ## OptionsLibrary

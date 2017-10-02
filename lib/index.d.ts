@@ -8,6 +8,7 @@ export declare class CodeWriter {
     private condition;
     private options;
     private indentSize;
+    private indentType;
     /**
      * Creates an instance of the CodeWriter class.
      * @param {CodeWriterOptions} options - Options used to configure the CodeWriter instance.
@@ -16,12 +17,14 @@ export declare class CodeWriter {
     constructor(options?: CodeWriterOptions);
     /**
      * Indents the current indent level.
-     * @param {string} code - If specified, code is added after indenting
+     * @param {string} code If specified, code is added after indenting
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     indent(code?: string): this;
     /**
      * Unindents the current indent level.
      * @param {string} code - If specified, code is added after unindenting.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     unindent(code?: string): this;
     /**
@@ -29,6 +32,7 @@ export declare class CodeWriter {
      * configured in the options.startBlock property.
      * @param {string} code Optional code that can be part of the block. This may be used for
      * certain languages and ignored for others.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     startBlock(code?: string): this;
     /**
@@ -36,17 +40,20 @@ export declare class CodeWriter {
      * configured in the options.endBlock property.
      * @param {string} code Optional code that can be part of the block. This may be used for
      * certain languages and ignored for others.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     endBlock(code?: string): this;
     /**
      * Writes one or more lines of indented code.
      * @param {string[]} code - One or more lines of code to write.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     line(...code: string[]): this;
     /**
      * Writes one or more lines of indented code, only if the specified condition is satisfied.
      * @param {boolean} condition The condition to satisfy
      * @param {string[]} code One or more lines of code to write
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     lineIf(condition: boolean, ...code: string[]): this;
     /**
@@ -54,15 +61,18 @@ export declare class CodeWriter {
      * Calls to inline can be chained until done() is called at which point the line is written.
      * @param {string} code The code to add to the current line
      * @param {boolean} condition The condition upon which the code will be added
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     inline(code: string, condition?: boolean): this;
     /**
      * Indicates the completion of one or more inline() calls and writes the current line.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     done(): this;
     /**
      * Writes a blank line.
      * @param condition Optional condition to write the blank line
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     blank(condition?: boolean): this;
     /**
@@ -70,6 +80,7 @@ export declare class CodeWriter {
      * @param {Array} arr The array to iterate over.
      * @param {Function} fn The function to call for each item. The parameters are the CodeWriter
      * instance, the item and the index of the item in the array.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     repeat<T>(arr: T[], fn: (cw: this, item: T, index: number, array: T[]) => void): this;
     /**
@@ -78,6 +89,7 @@ export declare class CodeWriter {
      * @param {Object} obj The object to iterate over
      * @param {Function} fn The function to call for each item. The parameters are the CodeWriter
      * instance, the item and the index of the item in the array.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     iterate(obj: {
         [k: string]: Object;
@@ -88,6 +100,7 @@ export declare class CodeWriter {
      * @param { Function } builderFn The function to call. The parameters are the CodeWriter
      * instance and the additional arguments.
      * @param { Object[] } args The additional arguments to pass to the function.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     func(builderFn: (cw: this, ...args: Object[]) => void, ...args: Object[]): this;
     /**
@@ -97,13 +110,15 @@ export declare class CodeWriter {
      * @param { Function } builderFn The function to call. The parameters are the CodeWriter
      * instance and the additional arguments.
      * @param { Object[] } args The additional arguments to pass to the function.
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     funcIf(condition: boolean, builderFn: (cw: this, ...args: Object[]) => void, ...args: Object[]): this;
     /**
      * Constructs a single line comment string and generates code for it.
      * The options.singleLineComment property must be assigned for the CodeWriter to know how to
      * construct the comment string.
-     * @param comments
+     * @param {string[]} comments Comment strings to generate
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     comment(...comments: string[]): this;
     /**
@@ -112,7 +127,8 @@ export declare class CodeWriter {
      * construct the comment string.
      * If the option property is not assigned, the method attempts to use the
      * options.singleLineComment property to generate multiple single line comments.
-     * @param comments
+     * @param {string[]} comments Comment strings to generate
+     * @returns {CodeWriter} Instance of the CodeWriter
      */
     multiLineComment(...comments: string[]): this;
     docComment(...comments: string[]): this;
@@ -120,6 +136,7 @@ export declare class CodeWriter {
     endIf(): this;
     /**
      * Returns the currently built code as a string
+     * @returns {string} Currently built code
      */
     toCode(): string;
 }
@@ -135,6 +152,7 @@ export interface CodeWriterOptions {
      * The indentation size in spaces. Defaults to 4 if not specified.
      */
     indentSize?: number;
+    indentType?: 'spaces' | 'tabs';
     /**
      * Function that can format a given string as a language-specific single-line comment.
      */
