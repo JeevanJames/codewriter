@@ -12,6 +12,7 @@ export class CodeWriter {
 
     private options: CodeWriterOptions;
     private indentSize: number;
+    private indentType: 'spaces' | 'tabs';
 
     /**
      * Creates an instance of the CodeWriter class.
@@ -33,6 +34,7 @@ export class CodeWriter {
             this.code = [];
         }
         this.indentSize = this.options.indentSize || 4;
+        this.indentType = this.options.indentType || 'spaces';
     }
 
     /**
@@ -96,11 +98,13 @@ export class CodeWriter {
      * @param {string[]} code - One or more lines of code to write.
      */
     public line(...code: string[]): this {
+        // If we're in a conditional block and the condition evaluates to false, don't do anything.
         if (this.condition != undefined && !this.condition) {
             return this;
         }
         for (let i = 0; i < (code || []).length; i++) {
-            this.code.push(' '.repeat(this.currentIndent) + code[i]);
+            const indent = this.indentType === 'spaces' ? ' '.repeat(this.currentIndent) : '\t'.repeat(this.currentIndent / this.indentSize);
+            this.code.push(indent + code[i]);
         }
         return this;
     }
@@ -299,6 +303,8 @@ export interface CodeWriterOptions {
      * The indentation size in spaces. Defaults to 4 if not specified.
      */
     indentSize?: number;
+
+    indentType?: 'spaces' | 'tabs';
 
     /**
      * Function that can format a given string as a language-specific single-line comment.

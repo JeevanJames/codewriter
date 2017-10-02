@@ -1,6 +1,7 @@
 import { CodeWriter, CodeWriterOptions, OptionsLibrary } from '../src';
 
-const options: CodeWriterOptions = OptionsLibrary.python;
+const options: CodeWriterOptions = OptionsLibrary.csharp;
+options.indentType = 'tabs';
 const writer = new CodeWriter(options);
 
 writer
@@ -28,3 +29,4 @@ writer
 
 const code: string = writer.toCode();
 console.log(code);
+console.log('\tblah');
