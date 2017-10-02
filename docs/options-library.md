@@ -9,4 +9,5 @@ The `OptionsLibrary` class provides predefined options for certain common langua
 |`csharp`|C# language options|
 |`java`|Java language options|
 |`javascript`|JavaScript language options|
+|`python`|Python language options|
 |`typescript`|Typescript language options|
