@@ -14,6 +14,9 @@ namespace ConsoleProgram
 {
     internal static class Program
     {
+        /// <summary>
+        /// Entry point for the application
+        /// </summary>
         private static void Main(string[] args)
         {
             // Your code goes here
@@ -42,6 +45,9 @@ writer
         .line(`internal static class Program`)
         .line(`{`)
         .indent()
+            .line(`/// <summary>`)
+            .line(`/// Entry point for the application`)
+            .line(`/// </summary>`)
             .line(`private static void Main(string[] args)`)
             .line(`{`)
             .indent()
@@ -69,6 +75,7 @@ writer
     .blank()
     .startBlock(`namespace ConsoleProgram`)
         .startBlock(`internal static class Program`)
+            .docComment(`Entry point for the application`)
             .startBlock(`private static void Main(string[] args)`)
                 .comment(`// Your code goes here`)
             .endBlock()
