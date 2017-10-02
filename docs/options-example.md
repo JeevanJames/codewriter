@@ -10,12 +10,25 @@ options.singleLineComment = (writer, comment) => {
 };
 
 /*
- * Outputs this type of
- * comment when the CodeWriter.multiLineComment
- * method is called.
- */
+   Outputs this type of
+   comment when the CodeWriter.multiLineComment
+   method is called.
+*/
 options.multiLineComment = (writer, comments) => {
     writer.line('/*')
+        .repeat(comments || [], (cw, comment) => {
+            cw.line(`   ${comment}`);
+        })
+        .line('*/');
+};
+
+/**
+ * Outputs thie type of
+ * comment when the CodeWriter.docComment
+ * method is called.
+ */
+options.docComment = (writer, comments) => {
+    writer.line('/**')
         .repeat(comments || [], (cw, comment) => {
             cw.line(` * ${comment}`);
         })
@@ -28,6 +41,6 @@ options.startBlock = (writer, code) => {
 };
 
 options.endBlock = (writer, code) => {
-    writer.unindent('}');
+    writer.unindent(code || '}');
 };
 ```
