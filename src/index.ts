@@ -232,8 +232,7 @@ export class CodeWriter {
         if (!this.options.singleLineComment) {
             throw new Error(`Formatter for a single line comment needs to be defined in the CodeWriter's constructor.`);
         }
-        const commentFn = this.options.singleLineComment;
-        (comments || []).forEach(comment => commentFn(this, comment));
+        (comments || []).forEach(comment => this.options.singleLineComment(this, comment));
         return this;
     }
 
@@ -241,13 +240,20 @@ export class CodeWriter {
      * Constructs a multi line comment string and generates code for it.
      * The options.multiLineComment property must be assigned for the CodeWriter to know how to
      * construct the comment string.
+     * If the option property is not assigned, the method attempts to use the
+     * options.singleLineComment property to generate multiple single line comments.
      * @param comments
      */
     public multiLineComment(...comments: string[]): this {
-        if (!this.options.multiLineComment) {
+        if (!this.options.multiLineComment && !this.options.singleLineComment) {
             throw new Error(`Formatter for a multi line comment needs to be defined in the CodeWriter's constructor.`);
         }
-        this.options.multiLineComment(this, comments);
+        if (this.options.multiLineComment) {
+            this.options.multiLineComment(this, comments);
+        }
+        if (this.options.singleLineComment) {
+            (comments || []).forEach(comment => this.options.singleLineComment(this, comment));
+        }
         return this;
     }
 
