@@ -38,6 +38,8 @@ CodeWriter allows some options to be specified in the constructor to customize h
 
 [Sample options for generating JavaScript code](docs/options-example.md)
 
+Through the [`OptionsLibrary`](docs/options-library.md) class, CodeWriter also provides predefined options for certain common languages and language families.
+
 ## Examples
 [Generate empty C# console program](docs/example-csharp-empty-console.md)
 
