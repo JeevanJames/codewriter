@@ -438,6 +438,36 @@ export class OptionsLibrary {
     }
 
     /**
+     * Returns options that apply to the Python language
+     */
+    public static get python(): CodeWriterOptions {
+        const options: CodeWriterOptions = {
+            singleLineComment: (writer, comment) => {
+                writer.line(`# ${comment}`);
+            },
+
+            docComment: (writer, comments) => {
+                writer.repeat(comments || [], (code, comment, i, arr) => {
+                    code.inline(`""" `, i === 0)
+                        .inline(comment)
+                        .inline(` """`, arr.length === 1)
+                        .done();
+                })
+                .lineIf(!!comments && comments.length > 1, `"""`);
+            },
+
+            startBlock: (writer) => {
+                writer.indent();
+            },
+
+            endBlock: (writer) => {
+                writer.unindent();
+            },
+        };
+        return options;
+    }
+
+    /**
      * Returns options that apply to the Typescript language
      */
     public static get typescript(): CodeWriterOptions {
