@@ -131,8 +131,31 @@ export declare class CodeWriter {
      * @returns {CodeWriter} Instance of the CodeWriter
      */
     multiLineComment(...comments: string[]): this;
+    /**
+     * Constructs a documentation comment string and generates code for it.
+     * The options.docComment property must be assigned for the CodeWriter to know how to construct
+     * the comment string.
+     * @param {string[]} comments Comment strings to generate
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
     docComment(...comments: string[]): this;
+    /**
+     * Starts a condition block. Any CodeWriter methods called in this block will only be executed
+     * if the condition is true.
+     * To exit the condition block, call the endIf method.
+     * @param condition Condition to evaluate
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
     if(condition: boolean): this;
+    /**
+     * Inverts the condition in a condition block.
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
+    else(): this;
+    /**
+     * Exits a condition block.
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
     endIf(): this;
     /**
      * Returns the currently built code as a string

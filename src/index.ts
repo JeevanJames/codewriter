@@ -327,7 +327,7 @@ export class CodeWriter {
      */
     public endIf(): this {
         if (this.condition == undefined) {
-            throw new Error(`No condition block available to exit. Use the if() method to start a block.`)
+            throw new Error(`No condition block available to exit. Use the if() method to start a block.`);
         }
         this.condition = undefined;
         return this;

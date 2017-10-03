@@ -33,6 +33,10 @@ Provides methods to build code blocks.
     * [.funcIf(builderFn, ...args)](#CodeWriter+funcIf) ⇒ [<code>CodeWriter</code>](#CodeWriter)
     * [.comment(...comments)](#CodeWriter+comment) ⇒ [<code>CodeWriter</code>](#CodeWriter)
     * [.multiLineComment(...comments)](#CodeWriter+multiLineComment) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.docComment(...comments)](#CodeWriter+docComment) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.if(condition)](#CodeWriter+if) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.else()](#CodeWriter+else) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+    * [.endIf()](#CodeWriter+endIf) ⇒ [<code>CodeWriter</code>](#CodeWriter)
     * [.toCode()](#CodeWriter+toCode) ⇒ <code>string</code>
 
 <a name="new_CodeWriter_new"></a>
@@ -226,6 +230,44 @@ Constructs a multi line comment string and generates code for it.The options.mu
 | --- | --- | --- |
 | ...comments | <code>Array.&lt;string&gt;</code> | Comment strings to generate |
 
+<a name="CodeWriter+docComment"></a>
+
+### codeWriter.docComment(...comments) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+Constructs a documentation comment string and generates code for it.The options.docComment property must be assigned for the CodeWriter to know how to constructthe comment string.
+
+**Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...comments | <code>Array.&lt;string&gt;</code> | Comment strings to generate |
+
+<a name="CodeWriter+if"></a>
+
+### codeWriter.if(condition) ⇒ [<code>CodeWriter</code>](#CodeWriter)
+Starts a condition block. Any CodeWriter methods called in this block will only be executedif the condition is true.To exit the condition block, call the endIf method.
+
+**Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
+
+| Param | Description |
+| --- | --- |
+| condition | Condition to evaluate |
+
+<a name="CodeWriter+else"></a>
+
+### codeWriter.else() ⇒ [<code>CodeWriter</code>](#CodeWriter)
+Inverts the condition in a condition block.
+
+**Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
+<a name="CodeWriter+endIf"></a>
+
+### codeWriter.endIf() ⇒ [<code>CodeWriter</code>](#CodeWriter)
+Exits a condition block.
+
+**Kind**: instance method of [<code>CodeWriter</code>](#CodeWriter)  
+**Returns**: [<code>CodeWriter</code>](#CodeWriter) - Instance of the CodeWriter  
 <a name="CodeWriter+toCode"></a>
 
 ### codeWriter.toCode() ⇒ <code>string</code>
