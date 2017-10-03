@@ -279,6 +279,13 @@ export class CodeWriter {
         return this;
     }
 
+    /**
+     * Constructs a documentation comment string and generates code for it.
+     * The options.docComment property must be assigned for the CodeWriter to know how to construct
+     * the comment string.
+     * @param {string[]} comments Comment strings to generate
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
     public docComment(...comments: string[]): this {
         if (!this.options.docComment) {
             throw new Error(`Formatter for a doc comment needs to be defined in the CodeWriter's constructor.`);
@@ -287,6 +294,13 @@ export class CodeWriter {
         return this;
     }
 
+    /**
+     * Starts a condition block. Any CodeWriter methods called in this block will only be executed
+     * if the condition is true.
+     * To exit the condition block, call the endIf method.
+     * @param condition Condition to evaluate
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
     public if(condition: boolean): this {
         if (this.condition != undefined) {
             throw new Error(`If condition already exists. Nested conditions not supported.`);
@@ -295,7 +309,26 @@ export class CodeWriter {
         return this;
     }
 
+    /**
+     * Inverts the condition in a condition block.
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
+    public else(): this {
+        if (this.condition == undefined) {
+            throw new Error(`Need to be in a condition block to use the else() method.`);
+        }
+        this.condition = !this.condition;
+        return this;
+    }
+
+    /**
+     * Exits a condition block.
+     * @returns {CodeWriter} Instance of the CodeWriter
+     */
     public endIf(): this {
+        if (this.condition == undefined) {
+            throw new Error(`No condition block available to exit. Use the if() method to start a block.`)
+        }
         this.condition = undefined;
         return this;
     }
