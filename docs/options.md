@@ -25,6 +25,11 @@ Type: `(writer: CodeWriter, comments: string[]) => void`
 
 Specifies how to generate a language-specific multi-line comment.
 
+## docComment
+Type: `(writer: CodeWriter, comments: string[]) => void`
+
+Specifies how to generate a language-specific document comment.
+
 ## startBlock
 Type: `(writer: CodeWriter, code?: string) => void`
 
