@@ -21,7 +21,7 @@ const code = writer.toCode();
 ```
 
 ### Typescript
-CodeWriter ships with a Typescript definition file.
+CodeWriter ships with a Typescript definition file, which provides strong-typing and compile-time support.
 ```ts
 import { CodeWriter, CodeWriterOptions } from 'codewriter';
 
