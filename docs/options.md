@@ -10,10 +10,14 @@ Default: `4`
 
 Number of spaces a tab is equal to.
 
+Currently, CodeWriter only supports indentation with spaces. Support for tab indentation is in the works.
+
 ## initialCode
 Type: `string | string[] | CodeWriter`
 
 Code to initialize the CodeWriter.
+
+This could be a single line of code (`string`), multiple lines of code (`string[]`) or another `CodeWriter` instance.
 
 ## singleLineComment
 Type: `(writer: CodeWriter, comment: string) => void`
