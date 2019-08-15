@@ -237,8 +237,8 @@ export declare class OptionsLibrary {
      * Returns options that apply to the Typescript language
      */
     static readonly typescript: CodeWriterOptions;
-    private static getCppCommentFn();
-    private static getJsDocCommentFn();
+    private static getCppCommentFn;
+    private static getJsDocCommentFn;
 }
 export interface CLanguageFamilyPrefs {
     braceLayout?: 'endOfLine' | 'endOfLineNoSpace' | 'nextLine';
