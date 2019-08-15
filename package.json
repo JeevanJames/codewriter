@@ -30,9 +30,9 @@
     },
     "homepage": "https://github.com/JeevanJames/codewriter#readme",
     "devDependencies": {
-        "@types/node": "^8.0.30",
-        "jsdoc-to-markdown": "^3.0.0",
-        "tslint": "^5.7.0",
-        "typescript": "^2.5.2"
+        "@types/node": "^12.7.2",
+        "jsdoc-to-markdown": "^5.0.0",
+        "tslint": "^5.18.0",
+        "typescript": "^3.5.3"
     }
 }
