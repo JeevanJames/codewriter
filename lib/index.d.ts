@@ -212,31 +212,31 @@ export declare class OptionsLibrary {
     /**
      * Returns options that apply to the C language
      */
-    static readonly c: CodeWriterOptions;
+    static get c(): CodeWriterOptions;
     /**
      * Returns options that apply to the C++ language
      */
-    static readonly cpp: CodeWriterOptions;
+    static get cpp(): CodeWriterOptions;
     /**
      * Returns options that apply to the C# language
      */
-    static readonly csharp: CodeWriterOptions;
+    static get csharp(): CodeWriterOptions;
     /**
      * Returns options that apply to the Java language
      */
-    static readonly java: CodeWriterOptions;
+    static get java(): CodeWriterOptions;
     /**
      * Returns options that apply to the JavaScript language
      */
-    static readonly javascript: CodeWriterOptions;
+    static get javascript(): CodeWriterOptions;
     /**
      * Returns options that apply to the Python language
      */
-    static readonly python: CodeWriterOptions;
+    static get python(): CodeWriterOptions;
     /**
      * Returns options that apply to the Typescript language
      */
-    static readonly typescript: CodeWriterOptions;
+    static get typescript(): CodeWriterOptions;
     private static getCppCommentFn;
     private static getJsDocCommentFn;
 }
